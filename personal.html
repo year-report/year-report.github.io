@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 变量定义 */
+        :root {
+            --color-background: white;
+            --color-text: #1d1d1f;
+            --color-light-text: #86868b;
+            --color-accent: #0071e3;
+            --color-accent-hover: #0077ed;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --glass-blur: 15px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--color-text);
+            background: var(--color-background);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100vh;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* 隐藏滚动条 */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 顶部按钮容器样式 */
+        .top-buttons-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        /* 导航按钮样式 */
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 28px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(var(--glass-blur));
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        .nav-icon {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+        }
+
+        /* 个人信息卡片 */
+        .profile-card {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .profile-title {
+            font-size: 21px;
+            color: #86868b;
+            margin-bottom: 40px;
+            line-height: 1.381;
+        }
+
+        .profile-description {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        /* 社交链接 */
+        .social-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 980px;
+            background: rgba(245, 245, 247, 0.8);
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: var(--color-accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* 内容区域 */
+        .content-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        .card-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 120px;
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 100px 20px 40px;
+            }
+
+            .profile-name {
+                font-size: 36px;
+            }
+
+            .profile-title {
+                font-size: 18px;
+            }
+
+            .profile-avatar {
+                width: 140px;
+                height: 140px;
+                font-size: 60px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮容器 -->
+    <div class="top-buttons-container">
+        <!-- 返回按钮 -->
+        <button class="nav-btn nav-back" id="nav-back" aria-label="返回">
+            <span class="nav-icon">←</span>
+            <span class="nav-text">返回</span>
+        </button>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 个人信息卡片 -->
+        <section class="profile-card">
+            <div class="profile-avatar">👤</div>
+            <h1 class="profile-name">个人主页</h1>
+            <p class="profile-title">记录生活，分享想法</p>
+            <p class="profile-description">
+                这里是我的个人主页，展示我的生活记录、学习心得和一些有趣的想法。
+                感谢您的访问，希望您能在这里找到有价值的内容。
+            </p>
+
+        <!-- 关于我 -->
+        <section class="content-section">
+            <h2 class="section-title">关于我</h2>
+            <div class="card-grid">
+                <div class="content-card">
+                    <h3 class="card-title">🎯 兴趣爱好</h3>
+                    <p class="card-content">
+                        喜欢阅读、编程、音乐和旅行。
+                        对新技术和创新思维充满好奇心，
+                        乐于探索不同领域的知识。
+                    </p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">📚 学习经历</h3>
+                    <p class="card-content">
+                        持续学习，不断成长。
+                        专注于前端开发、人工智能和数据分析，
+                        享受解决问题的过程。
+                    </p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">🌟 未来规划</h3>
+                    <p class="card-content">
+                        继续提升技术能力，
+                        分享更多有价值的内容，
+                        与志同道合的人交流合作。
+                    </p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">💡 价值理念</h3>
+                    <p class="card-content">
+                        追求简单、高效、创新。
+                        相信技术改变生活，
+                        注重用户体验和产品质量。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最近动态 -->
+        <section class="content-section">
+            <h2 class="section-title">最近动态</h2>
+            <div class="card-grid">
+                <div class="content-card">
+                    <h3 class="card-title">📝 项目更新</h3>
+                    <p class="card-content">
+                        最近完成了一个个人网站项目，
+                        采用了现代化的设计理念和技术栈，
+                        欢迎访问体验。
+                    </p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">📖 阅读分享</h3>
+                    <p class="card-content">
+                        最近阅读了一本关于人工智能的书籍，
+                        收获颇丰，后续会分享读后感。
+                    </p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">💡 技术探索</h3>
+                    <p class="card-content">
+                        正在学习新的前端框架，
+                        探索更高效的开发方式，
+                        提升用户体验。
+                    </p>
+                </div>
+                <a href="index.html" class="content-card" style="text-decoration: none; display: block;">
+                    <h3 class="card-title" style="color: var(--color-accent);">📅 年度总结</h3>
+                    <p class="card-content">
+                        查看2024年度总结报告，
+                        回顾过去一年的成长与收获，
+                        点击查看完整内容。
+                    </p>
+                    <p style="margin-top: 16px; font-size: 14px; color: var(--color-accent); font-weight: 500;">
+                        点击查看 →
+                    </p>
+                </a>
+            </div>
+        </section>
+        <p>2025 个人主页 | 保持热爱，奔赴山海</p>
+        <p>2026 精彩继续</p>
+    </main>
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 可以添加一些交互效果
+            console.log('个人主页加载完成');
+        });
+    </script>
+</body>
+</html>

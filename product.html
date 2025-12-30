@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全新2024年度报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 变量定义 */
+        :root {
+            --color-background: white;
+            --color-text: #1d1d1f;
+            --color-light-text: #86868b;
+            --color-accent: #0071e3;
+            --color-accent-hover: #0077ed;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --glass-blur: 15px;
+        }
+        
+        /* 免责声明样式 */
+        .disclaimer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(var(--glass-blur));
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .disclaimer-modal.active {
+            display: flex;
+        }
+        
+        .disclaimer-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .disclaimer-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        
+        .disclaimer-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer-subtitle {
+            font-size: 16px;
+            color: #86868b;
+        }
+        
+        .disclaimer-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-btn {
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .disclaimer-btn.secondary {
+            background: transparent;
+            color: #0071e3;
+            border: 1px solid #0071e3;
+        }
+        
+        .disclaimer-btn.secondary:hover {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .disclaimer-btn.primary {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .disclaimer-btn.primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+        
+        /* 第二个免责声明样式 */
+        .disclaimer-confirm {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .disclaimer-confirm-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer-confirm-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+        }
+        
+        .disclaimer-confirm-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-confirm-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--color-text);
+            background: var(--color-background);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100vh;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* 隐藏滚动条 */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 顶部按钮容器样式 */
+        .top-buttons-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        /* 导航按钮样式 */
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 28px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(var(--glass-blur));
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        .nav-icon {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* 设置面板样式 */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            height: 100vh;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .settings-panel.active {
+            right: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .settings-content {
+            position: absolute;
+            top: 0;
+            right: -380px;
+            width: 380px;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-left: 1px solid var(--glass-border);
+            box-shadow: -10px 0 40px 0 rgba(31, 38, 135, 0.2);
+            padding: 32px 24px;
+            overflow-y: auto;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-top-left-radius: 32px;
+            border-bottom-left-radius: 32px;
+        }
+
+        .settings-panel.active .settings-content {
+            right: 0;
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .settings-header h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: -0.5px;
+        }
+
+        .settings-close {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--glass-border);
+            font-size: 20px;
+            color: var(--color-text);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .settings-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-section {
+            margin-bottom: 40px;
+        }
+
+        .settings-section h4 {
+            margin: 0 0 20px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: 0.2px;
+        }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .color-option {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-option:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* 滚动条样式优化 */
+        .settings-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .settings-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .settings-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .settings-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* 主标题区域 */
+        .hero-section {
+            text-align: center;
+            padding: 120px 20px 100px;
+            background: var(--color-background);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-badge {
+            font-size: 14px;
+            color: #bf4800;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .product-title {
+            font-size: 80px;
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #1d1d1f 0%, #4a4a4f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-subtitle {
+            font-size: 28px;
+            line-height: 1.142;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-size: 17px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #0071e3;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #0071e3;
+            border: 1px solid #0071e3;
+        }
+
+        .btn-secondary:hover {
+            background: #0071e3;
+            color: white;
+        }
+
+        /* 产品展示 */
+        .showcase-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--color-background);
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 100px 80px rgba(0, 0, 0, 0.15));
+        }
+
+        /* 特性部分 */
+        .feature-section {
+            padding: 120px 20px;
+            max-width: 980px;
+            margin: 0 auto;
+            background: var(--color-background);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+            align-items: center;
+        }
+
+        .feature-text h3 {
+            font-size: 48px;
+            line-height: 1.083;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -0.003em;
+        }
+
+        .feature-text p {
+            font-size: 21px;
+            line-height: 1.381;
+            color: #86868b;
+        }
+
+        .feature-image img {
+            width: 100%;
+            border-radius: 18px;
+        }
+
+        /* 技术规格 */
+        .specs-section {
+            background: rgba(245, 245, 247, 0.8);
+            padding: 100px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .specs-container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .specs-title {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .spec-label {
+            font-size: 14px;
+            color: #86868b;
+            letter-spacing: 0.02em;
+        }
+
+        /* 获取方式 */
+        .purchase-section {
+            padding: 100px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .purchase-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .purchase-subtitle {
+            font-size: 21px;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .price-tag {
+            font-size: 80px;
+            font-weight: 700;
+            margin: 40px 0;
+        }
+
+        .price-note {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .ai-ready {
+            font-size: 24px;
+            color: #ffd700;
+            margin-top: 60px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 48px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-tag {
+                font-size: 48px;
+            }
+            
+            .ai-ready {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮容器 -->
+    <div class="top-buttons-container">
+        <!-- 设置按钮 -->
+        <button class="nav-btn nav-settings" id="nav-settings" aria-label="设置">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">设置</span>
+        </button>
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3>设置</h3>
+                <button class="settings-close" id="settings-close">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h4>背景颜色</h4>
+                    <div class="color-options">
+                        <button class="color-option" data-bg="white">白色</button>
+                        <button class="color-option" data-bg="linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)">粉色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)">蓝色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">紫色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">湖蓝渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">橙粉渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(45deg, #43e97b 0%, #38f9d7 100%)">绿色渐变</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认窗口 -->
+    <div class="disclaimer-modal" id="quote-disclaimer-modal">
+        <div class="disclaimer-confirm">
+            <div class="disclaimer-confirm-icon">⚠️</div>
+            <h3 class="disclaimer-confirm-title">重要声明</h3>
+            <div class="disclaimer-confirm-text">
+                <p>这不是梗，而是语录。</p>
+                <p>内容旨在回忆今年同学们所存在的问题，没有任何侮辱、讽刺、打趣老师的意图。</p>
+                <p>不论您如何想、如何做，都与开发者无关。</p>
+            </div>
+            <div class="disclaimer-confirm-buttons">
+                <button class="disclaimer-btn secondary" id="quote-disclaimer-cancel">取消</button>
+                <button class="disclaimer-btn primary" id="quote-disclaimer-accept">继续查看</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 特性1：完整记录 -->
+    <section class="feature-section">
+        <div class="feature-grid">
+            <div class="feature-text">
+                <h3>完整记录</h3>
+                <p>全新年度报告采用样式极简，但内容丰富的设计理念，囊括全年核心洞察数学老师的关键成果，却薄至纤毫。精湛的内容架构让每一页都承载最大价值，毫无冗余。</p>
+                <div class="cta-buttons" style="margin-top: 40px;">
+                    <button id="view-quote-btn" class="btn btn-primary">查看语录</button>
+                </div>
+            </div>
+            <div class="feature-image">
+                <img src="https://picsum.photos/id/180/600/400" alt="精致全面设计">
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性2：全面总结 -->
+    <section class="feature-section">
+        <div class="feature-grid">
+            <div class="feature-image">
+                <img src="./src/summarize.png" alt="强大洞察">
+            </div>
+            <div class="feature-text">
+                <h3>全面总结</h3>
+                <p>搭载全年深度数据分析引擎，记录梗的效率提升三倍以上。无论是熟为人知的，还是鲜为人知的，都能瞬间呈现。全面解释，让您了解这一年所有梗。</p>
+                <div class="cta-buttons" style="margin-top: 40px;">
+                    <a href="geng.html" class="btn btn-primary">查看总结</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性3：支持小众语言—光语 -->
+    <section class="feature-section">
+        <div class="feature-grid">
+            <div class="feature-text">
+                <h3>支持小众语言—光语</h3>
+                <p>班中天才同学自创的新语言，结合英语的乱拼和中文的乱翻译，帮助您与他人更加困难、有障碍的交流</p>
+                <div class="cta-buttons" style="margin-top: 40px;">
+                    <a href="guanglish.html" class="btn btn-primary">查询词汇</a>
+                </div>
+            </div>
+            <div class="feature-image">
+                <img src="https://picsum.photos/id/20/600/400" alt="专业数据系统">
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性4：千年老梗 -->
+    <section class="feature-section">
+        <div class="feature-grid">
+            <div class="feature-image">
+                <img src="./src/Orange_Intelligence_icon.png" alt="专业数据系统" style="width: 430px;height: auto;object-fit: contain;">
+            </div>
+            <div class="feature-text">
+                <h3>已为Orange intelligence做好准备</h3>
+                <p>怎么apple还不推出apple intelligence（小声吐槽）</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术规格 -->
+    <section class="specs-section">
+        <div class="specs-container">
+            <h2 class="specs-title">技术规格</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <div class="spec-value">你的屏幕厚度</div>
+                    <div class="spec-label">厚度</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">48MP</div>
+                    <div class="spec-label">图表精度</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">365天</div>
+                    <div class="spec-label">数据覆盖</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">全天候</div>
+                    <div class="spec-label">实时更新</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">全班</div>
+                    <div class="spec-label">业务覆盖</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">不兼容</div>
+                    <div class="spec-label">多设备兼容</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 加载保存的背景颜色
+            const savedBgColor = localStorage.getItem('backgroundColor');
+            if (savedBgColor) {
+                document.body.style.background = savedBgColor;
+                document.documentElement.style.setProperty('--color-background', savedBgColor);
+            }
+            
+            // 绑定设置面板事件
+            bindSettingsEvents();
+            
+            // 绑定语录查看按钮事件
+            bindQuoteEvents();
+        });
+
+        // 绑定设置面板事件
+        function bindSettingsEvents() {
+            const settingsBtn = document.getElementById('nav-settings');
+            const settingsPanel = document.getElementById('settings-panel');
+            const settingsClose = document.getElementById('settings-close');
+            const colorOptions = document.querySelectorAll('.color-option');
+            
+            // 设置按钮点击事件
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', () => {
+                    settingsPanel.classList.add('active');
+                });
+            }
+            
+            // 关闭按钮点击事件
+            if (settingsClose) {
+                settingsClose.addEventListener('click', () => {
+                    settingsPanel.classList.remove('active');
+                });
+            }
+            
+            // 点击面板外部关闭面板
+            settingsPanel.addEventListener('click', (e) => {
+                if (e.target === settingsPanel) {
+                    settingsPanel.classList.remove('active');
+                }
+            });
+            
+            // 颜色选项点击事件
+            colorOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const bg = option.getAttribute('data-bg');
+                    document.body.style.background = bg;
+                    document.documentElement.style.setProperty('--color-background', bg);
+                    // 保存背景颜色到localStorage
+                    localStorage.setItem('backgroundColor', bg);
+                    settingsPanel.classList.remove('active');
+                });
+            });
+        }
+        
+        // 绑定语录查看按钮事件
+        function bindQuoteEvents() {
+            const viewQuoteBtn = document.getElementById('view-quote-btn');
+            const quoteDisclaimerModal = document.getElementById('quote-disclaimer-modal');
+            const quoteDisclaimerCancel = document.getElementById('quote-disclaimer-cancel');
+            const quoteDisclaimerAccept = document.getElementById('quote-disclaimer-accept');
+            
+            // 查看语录按钮点击事件
+            if (viewQuoteBtn) {
+                viewQuoteBtn.addEventListener('click', () => {
+                    quoteDisclaimerModal.classList.add('active');
+                });
+            }
+            
+            // 取消按钮点击事件
+            if (quoteDisclaimerCancel) {
+                quoteDisclaimerCancel.addEventListener('click', () => {
+                    quoteDisclaimerModal.classList.remove('active');
+                });
+            }
+            
+            // 继续查看按钮点击事件
+            if (quoteDisclaimerAccept) {
+                quoteDisclaimerAccept.addEventListener('click', () => {
+                    window.location.href = 'lapagay.html';
+                });
+            }
+            
+            // 点击面板外部关闭面板
+            quoteDisclaimerModal.addEventListener('click', (e) => {
+                if (e.target === quoteDisclaimerModal) {
+                    quoteDisclaimerModal.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

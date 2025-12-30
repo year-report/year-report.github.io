@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全新2024年度报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 变量定义 */
+        :root {
+            --color-background: white;
+            --color-text: #1d1d1f;
+            --color-light-text: #86868b;
+            --color-accent: #0071e3;
+            --color-accent-hover: #0077ed;
+            --glass-blur: 15px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--color-text);
+            background: var(--color-background);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100vh;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* 隐藏滚动条 */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 主标题区域 */
+        .hero-section {
+            text-align: center;
+            padding: 120px 20px 100px;
+            background: var(--color-background);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 免责声明样式 */
+        .disclaimer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(var(--glass-blur));
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .disclaimer-modal.active {
+            display: flex;
+        }
+        
+        .disclaimer-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .disclaimer-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        
+        .disclaimer-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer-subtitle {
+            font-size: 16px;
+            color: #86868b;
+        }
+        
+        .disclaimer-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-text p {
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer-text h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+        
+        .disclaimer-text ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer-text li {
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .disclaimer-checkbox label {
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .disclaimer-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5ea;
+        }
+        
+        .disclaimer-btn {
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .disclaimer-btn.secondary {
+            background: transparent;
+            color: #0071e3;
+            border: 1px solid #0071e3;
+        }
+        
+        .disclaimer-btn.secondary:hover {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .disclaimer-btn.primary {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .disclaimer-btn.primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+        
+        .disclaimer-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* 第二个免责声明样式 */
+        .disclaimer-confirm {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .disclaimer-confirm-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .disclaimer-confirm-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+        }
+        
+        .disclaimer-confirm-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .disclaimer-confirm-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .product-title {
+            font-size: 80px;
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #1d1d1f 0%, #4a4a4f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-subtitle {
+            font-size: 28px;
+            line-height: 1.142;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-size: 17px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .btn-primary {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+    <body>
+        <!-- 主标题区域 -->
+        <section class="hero-section">
+            <h1 class="product-title">2024年度报告</h1>
+            <p class="product-subtitle">全面总结。极致轻薄。</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" id="explore-btn">探索功能</button>
+            </div>
+        </section>
+
+        <!-- 免责声明模态框 -->
+        <div class="disclaimer-modal" id="disclaimer-modal">
+            <div class="disclaimer-content">
+                <div class="disclaimer-header">
+                    <h2 class="disclaimer-title">免责声明</h2>
+                    <p class="disclaimer-subtitle">请仔细阅读以下内容</p>
+                </div>
+                <div class="disclaimer-text">
+                    <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 20px; color: #1d1d1f;">1. 核心免责声明</h3>
+                    <p style="font-weight: 500; margin-bottom: 20px;">重要提示：本网站内容仅供娱乐和学习参考，所有热梗、段子、故事等均为虚构或经过艺术加工，不针对任何个人、团体或组织。</p>
+                    <p>访问和使用本网站，即表示您已完全理解并同意本免责声明的所有条款和条件。如果您不同意本免责声明的任何部分，请立即停止使用本网站。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">2. 内容性质</h3>
+                    <p>本网站所发布的所有内容，包括但不限于文字、图片、视频、音频等，均为：</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>仅供娱乐和学习参考，不具有任何实际指导意义</li>
+                        <li>经过艺术加工和夸张处理，不反映真实情况</li>
+                        <li>不构成任何形式的建议、推荐或承诺</li>
+                        <li>不代表任何官方立场或观点</li>
+                    </ul>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">3. 责任免除</h3>
+                    <p>在法律允许的最大范围内，本网站及其运营者、开发者、维护者等，不承担任何因使用或依赖本网站内容而产生的直接或间接责任，包括但不限于：</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>任何人身伤害、财产损失或精神损害</li>
+                        <li>任何直接、间接、偶然、特殊或后果性的损害</li>
+                        <li>任何利润损失、业务中断或数据丢失</li>
+                        <li>任何因内容不准确、不完整或过时而产生的损失</li>
+                        <li>任何因网站技术故障、中断或错误而产生的损失</li>
+                    </ul>
+                    <p>本网站不对任何用户因使用本网站内容而采取的任何行动负责，用户应自行承担所有风险和责任。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">4. 内容准确性</h3>
+                    <p>本网站尽力确保所发布内容的准确性和完整性，但不保证内容的绝对准确、完整或最新。本网站有权随时修改、删除或更新任何内容，无需提前通知。</p>
+                    <p>本网站所引用的外部数据、资料或链接，仅供参考，本网站不对其准确性、可靠性或合法性负责。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">5. 知识产权</h3>
+                    <p>本网站的所有内容，包括但不限于文字、图片、视频、音频、设计、商标、标识等，均受相关知识产权法律保护。未经本网站书面许可，任何单位或个人不得以任何形式复制、传播、修改、分发或商业使用本网站内容。</p>
+                    <p>本网站尊重他人的知识产权，如有内容侵犯了您的知识产权，请及时联系我们，我们将立即处理。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">6. 第三方链接</h3>
+                    <p>本网站可能包含指向第三方网站的链接，这些链接仅为方便用户而提供。本网站不对任何第三方网站的内容、隐私政策或安全性负责，访问第三方网站的风险由用户自行承担。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">7. 用户行为规范</h3>
+                    <p>用户在使用本网站时，应遵守相关法律法规和社会公德，不得：</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>发布或传播任何违法、违规、淫秽、暴力、诽谤、侮辱或其他不当内容</li>
+                        <li>侵犯他人的知识产权、隐私权或其他合法权益</li>
+                        <li>从事任何可能损害本网站或其他用户利益的行为</li>
+                        <li>使用任何自动化工具或手段访问、抓取或收集本网站内容</li>
+                    </ul>
+                    <p>对于违反上述规范的用户，本网站有权采取包括但不限于删除内容、限制访问、封禁账号等措施。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">8. 法律适用和管辖</h3>
+                    <p>本免责声明的解释和执行均适用中华人民共和国法律。任何因本网站或本免责声明而产生的争议，应首先通过友好协商解决；协商不成的，任何一方均有权向有管辖权的人民法院提起诉讼。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">9. 免责声明的修改</h3>
+                    <p>本网站有权随时修改本免责声明的内容，修改后的免责声明将在本网站上公布，自公布之日起生效。用户应定期查阅本免责声明，以了解最新版本。</p>
+                    
+                    <h3 style="font-size: 20px; font-weight: 600; margin: 30px 0 20px 0; color: #1d1d1f;">10. 联系我们</h3>
+                    <p>如果您对本免责声明有任何疑问或建议，请通过以下方式联系我们：</p>
+                    <p style="margin-top: 10px;">联系方式：support@example.com</p>
+                    <p style="margin-top: 10px;">更新日期：2025年12月22日</p>
+                </div>
+                <div class="disclaimer-checkbox">
+                    <input type="checkbox" id="disclaimer-checkbox">
+                    <label for="disclaimer-checkbox">我已仔细阅读并同意上述免责声明</label>
+                </div>
+                <div class="disclaimer-buttons">
+                    <button class="disclaimer-btn secondary" id="disclaimer-cancel">取消</button>
+                    <button class="disclaimer-btn primary" id="disclaimer-confirm" disabled>确认</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二个确认模态框 -->
+        <div class="disclaimer-modal" id="disclaimer-confirm-modal">
+            <div class="disclaimer-confirm">
+                <div class="disclaimer-confirm-icon">⚠️</div>
+                <h3 class="disclaimer-confirm-title">重要提示</h3>
+                <div class="disclaimer-confirm-text">
+                    <p>不管你有没有阅读刚才的免责声明，总之本网站仅供娱乐，没有任何个人情感恩怨，请勿对号入座。</p>
+                    <p>如果伤了你的心你想跳楼啥的，也不要把这个网站当成理由。如果真的有让你不舒服的地方，没关系的，你可以找我，我删掉。</p>
+                </div>
+                <div class="disclaimer-confirm-buttons">
+                    <button class="disclaimer-btn secondary" id="disclaimer-confirm-cancel">取消</button>
+                    <button class="disclaimer-btn primary" id="disclaimer-confirm-accept">确认并继续</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // 页面加载完成后执行
+            document.addEventListener('DOMContentLoaded', () => {
+                // 获取DOM元素
+                const exploreBtn = document.getElementById('explore-btn');
+                const disclaimerModal = document.getElementById('disclaimer-modal');
+                const disclaimerConfirmModal = document.getElementById('disclaimer-confirm-modal');
+                const disclaimerCheckbox = document.getElementById('disclaimer-checkbox');
+                const disclaimerConfirmBtn = document.getElementById('disclaimer-confirm');
+                const disclaimerCancelBtn = document.getElementById('disclaimer-cancel');
+                const disclaimerConfirmCancelBtn = document.getElementById('disclaimer-confirm-cancel');
+                const disclaimerConfirmAcceptBtn = document.getElementById('disclaimer-confirm-accept');
+
+                // 探索功能按钮点击事件
+                exploreBtn.addEventListener('click', () => {
+                    disclaimerModal.classList.add('active');
+                });
+
+                // 取消按钮点击事件
+                disclaimerCancelBtn.addEventListener('click', () => {
+                    disclaimerModal.classList.remove('active');
+                });
+
+                // 第二个模态框取消按钮点击事件
+                disclaimerConfirmCancelBtn.addEventListener('click', () => {
+                    disclaimerConfirmModal.classList.remove('active');
+                    disclaimerModal.classList.add('active');
+                });
+
+                // 免责声明复选框点击事件
+                disclaimerCheckbox.addEventListener('change', () => {
+                    disclaimerConfirmBtn.disabled = !disclaimerCheckbox.checked;
+                });
+
+                // 免责声明确认按钮点击事件
+                disclaimerConfirmBtn.addEventListener('click', () => {
+                    if (disclaimerCheckbox.checked) {
+                        // 显示第二个确认模态框
+                        disclaimerModal.classList.remove('active');
+                        disclaimerConfirmModal.classList.add('active');
+                    }
+                });
+
+                // 最终确认按钮点击事件
+                disclaimerConfirmAcceptBtn.addEventListener('click', () => {
+                    // 跳转到产品页面
+                    window.location.href = 'product.html';
+                });
+            });
+        </script>
+    </body>
+</html>

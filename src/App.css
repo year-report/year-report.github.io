@@ -1,0 +1,117 @@
+.app {
+  position: relative;
+}
+
+/* 固定定位容器 */
+.fixed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fixed-container > * {
+  pointer-events: auto;
+}
+
+/* 按钮包装器 */
+.liquid-glass-btn-wrapper {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-glass-btn-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.liquid-glass-btn-wrapper:active {
+  transform: scale(0.95);
+}
+
+/* 按钮样式 */
+.liquid-glass-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 水滴涟漪效果 */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(0);
+  animation: ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* 液态玻璃矩形卡片 */
+.frost-glass-box {
+  max-width: 500px;
+  width: 90%;
+  color: white;
+  text-align: center;
+}
+
+.frost-glass-box h2 {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.frost-glass-box p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 滚动内容 */
+.scroll-content {
+  position: relative;
+  z-index: 1;
+  margin-top: 100vh;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 200vh;
+}
+
+.scroll-content article {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.scroll-content h2 {
+  color: #667eea;
+  margin-top: 40px;
+}

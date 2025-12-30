@@ -1,0 +1,4916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光式英语词典 | 2025 热梗总结</title>
+    <meta name="description" content="光式英语词典，探索独特的英语表达方式">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 词典样式 */
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-background);
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        /* 词典容器 */
+        .dictionary-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 20px 80px;
+        }
+
+        .dictionary-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .dictionary-title {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+            letter-spacing: -0.5px;
+        }
+
+        .dictionary-subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: #86868b;
+            letter-spacing: -0.2px;
+        }
+
+        /* 搜索框 */
+        .search-box {
+            background: white;
+            border: 1px solid #d2d2d7;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            font-size: 18px;
+            font-weight: 400;
+            color: #1d1d1f;
+            outline: none;
+            background: transparent;
+        }
+
+        .search-input::placeholder {
+            color: #86868b;
+        }
+
+        /* 词典条目 */
+        .dictionary-entries {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .entry {
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #d2d2d7;
+        }
+
+        .entry:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        /* 释义文本样式 - 与h4大小相同 */
+        .entry-definition p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0;
+        }
+        
+        /* 记忆技巧样式 */
+        .entry-memory-tip {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .entry-memory-tip h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0071e3;
+            margin: 0 0 8px 0;
+        }
+        
+        .entry-memory-tip p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .entry-word {
+            font-size: 40px;
+            font-weight: 700;
+            color: #1d1d1f;
+            line-height: 1.1;
+        }
+
+        .entry-phonetic {
+            font-size: 18px;
+            color: #0071e3;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .entry-category {
+            background: #f5f5f7;
+            color: #666;
+            padding: 6px 16px;
+            border-radius: 980px;
+            font-size: 14px;
+            font-weight: 500;
+            align-self: flex-start;
+        }
+
+        .entry-definition {
+            margin-bottom: 20px;
+        }
+
+        .entry-definition h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .entry-definition p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .entry-examples {
+            margin-bottom: 20px;
+        }
+
+        .entry-examples h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .example {
+            background: #f5f5f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .example:last-child {
+            margin-bottom: 0;
+        }
+
+        .example p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+
+        .example-translation {
+            font-size: 14px;
+            color: #86868b;
+            margin-top: 8px;
+        }
+
+        /* 页脚 */
+        .dictionary-footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            background: white;
+            border: 1px solid #d2d2d7;
+            color: #1d1d1f;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 40px;
+        }
+
+        .pagination button:hover {
+            background: #f5f5f7;
+        }
+
+        .pagination button.active {
+            background: #0071e3;
+            color: white;
+            border-color: #0071e3;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: #86868b;
+            margin: 0 16px;
+        }
+
+        .page-numbers {
+            display: flex;
+            gap: 4px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .dictionary-container {
+                padding: 80px 15px 60px;
+            }
+
+            .dictionary-title {
+                font-size: 48px;
+            }
+
+            .dictionary-subtitle {
+                font-size: 20px;
+            }
+
+            .dictionary-entries {
+                padding: 30px 20px;
+            }
+
+            .entry-word {
+                font-size: 32px;
+            }
+
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .apple-nav-links {
+                display: none;
+            }
+        }
+        
+        /* 手机端优化 (max-width: 480px) */
+        @media (max-width: 480px) {
+            .dictionary-container {
+                padding: 60px 10px 40px;
+            }
+            
+            .dictionary-title {
+                font-size: 36px;
+            }
+            
+            .dictionary-subtitle {
+                font-size: 16px;
+            }
+            
+            .dictionary-entries {
+                padding: 20px 15px;
+            }
+            
+            .entry {
+                margin-bottom: 32px;
+                padding-bottom: 32px;
+            }
+            
+            .entry-word {
+                font-size: 28px;
+            }
+            
+            .entry-phonetic {
+                font-size: 14px;
+            }
+            
+            .entry-category {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+            
+            .entry-definition p {
+                font-size: 16px;
+            }
+            
+            /* 分页样式优化 */
+            .pagination {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .page-numbers {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .pagination button {
+                padding: 8px 12px;
+                font-size: 14px;
+                min-width: 36px;
+            }
+            
+            /* 搜索框优化 */
+            .search-box {
+                padding: 12px 16px;
+            }
+            
+            .search-input {
+                font-size: 16px;
+            }
+        }
+        
+        /* Apple Watch 优化 (max-width: 200px) */
+        @media (max-width: 200px) {
+            .dictionary-container {
+                padding: 40px 8px 30px;
+            }
+            
+            .dictionary-title {
+                font-size: 24px;
+            }
+            
+            .dictionary-subtitle {
+                font-size: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .dictionary-entries {
+                padding: 16px 12px;
+            }
+            
+            .entry {
+                margin-bottom: 24px;
+                padding-bottom: 24px;
+            }
+            
+            .entry-word {
+                font-size: 20px;
+            }
+            
+            .entry-phonetic {
+                font-size: 10px;
+            }
+            
+            .entry-category {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            
+            .entry-definition p {
+                font-size: 12px;
+            }
+            
+            /* 分页样式优化 */
+            .pagination {
+                gap: 6px;
+            }
+            
+            .pagination button {
+                padding: 4px 8px;
+                font-size: 10px;
+                min-width: 24px;
+            }
+            
+            .pagination-info {
+                font-size: 10px;
+                margin: 0 8px;
+            }
+            
+            /* 搜索框优化 */
+            .search-box {
+                padding: 8px 12px;
+                margin-bottom: 20px;
+            }
+            
+            .search-input {
+                font-size: 12px;
+            }
+            
+            /* 导航按钮优化 */
+            .top-buttons-container {
+                top: 8px;
+                right: 8px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+            
+            .nav-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮容器 -->
+    <div class="top-buttons-container">
+        <!-- 返回按钮 -->
+        <button class="nav-btn nav-back" id="nav-back" aria-label="返回">
+            <span class="nav-icon">←</span>
+            <span class="nav-text">返回</span>
+        </button>
+        <!-- 设置按钮 -->
+        <button class="nav-btn nav-settings" id="nav-settings" aria-label="设置">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">设置</span>
+        </button>
+    </div>
+
+    <!-- 词典内容 -->
+    <div class="dictionary-container">
+        <div class="dictionary-header">
+            <h1 class="dictionary-title">光式英语词典</h1>
+            <p class="dictionary-subtitle">独特的英语表达方式</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="search-input" placeholder="搜索光式英语词汇...">
+        </div>
+        
+        <script>
+            // 搜索功能实现
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('search-input');
+                const dictionaryEntries = document.querySelector('.dictionary-entries');
+                const allEntries = Array.from(document.querySelectorAll('.entry'));
+                
+                if (searchInput && dictionaryEntries) {
+                    searchInput.addEventListener('input', function(e) {
+                        const searchTerm = e.target.value.toLowerCase();
+                        
+                        if (!searchTerm.trim()) {
+                            // 如果搜索框为空，显示所有条目
+                            allEntries.forEach(entry => {
+                                entry.style.display = 'block';
+                            });
+                            return;
+                        }
+                        
+                        // 过滤并显示匹配的条目
+                        allEntries.forEach(entry => {
+                            const word = entry.querySelector('.entry-word').textContent.toLowerCase();
+                            const phonetic = entry.querySelector('.entry-phonetic').textContent.toLowerCase();
+                            const definition = entry.querySelector('.entry-definition p').textContent.toLowerCase();
+                            
+                            if (word.includes(searchTerm) || phonetic.includes(searchTerm) || definition.includes(searchTerm)) {
+                                entry.style.display = 'block';
+                            } else {
+                                entry.style.display = 'none';
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
+
+        <div class="dictionary-entries">
+
+            <!-- 词典条目 5 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">indonda</div>
+                        <div class="entry-phonetic">/ɪnˈdɒndə/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>印地安</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 6 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">in seat of</div>
+                        <div class="entry-phonetic">/ɪn siːt əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>为了</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 7 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">in this on doing</div>
+                        <div class="entry-phonetic">/ɪn ðɪs ɒn ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>正在做</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 8 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">join up</div>
+                        <div class="entry-phonetic">/dʒɔɪn ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>加入</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 9 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep back</div>
+                        <div class="entry-phonetic">/kiːp bæk/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>回来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 10 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep of</div>
+                        <div class="entry-phonetic">/kiːp ɒv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>保持</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 11 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep on</div>
+                        <div class="entry-phonetic">/kiːp ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>保持</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 12 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep once world</div>
+                        <div class="entry-phonetic">/kiːp wʌns wɜːld/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>在同一世界</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 13 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep sb. from doing sth.</div>
+                        <div class="entry-phonetic">/kiːp ˈsʌmbədi frɒm ˈduːɪŋ ˈsʌmθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>保持某人做某事</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 14 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">not into sb.</div>
+                        <div class="entry-phonetic">/nɒt ˈɪntuː ˈsʌmbədi/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不进某人</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 15 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">leaf at</div>
+                        <div class="entry-phonetic">/liːf æt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>离开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 16 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">lead to</div>
+                        <div class="entry-phonetic">/liːd tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>离开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 17 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">let in</div>
+                        <div class="entry-phonetic">/let ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一起</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 18 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">low</div>
+                        <div class="entry-phonetic">/ləʊ/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>多</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 19 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">leave</div>
+                        <div class="entry-phonetic">/liːv/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>树叶</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 20 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">information</div>
+                        <div class="entry-phonetic">/ˌɪnfəˈmeɪʃn/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>信息</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 21 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">lease</div>
+                        <div class="entry-phonetic">/liːs/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>离开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 22 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">least</div>
+                        <div class="entry-phonetic">/liːst/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>离开的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 23 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">right</div>
+                        <div class="entry-phonetic">/raɪt/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>过去式：right；过去分词：right</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 24 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">let on</div>
+                        <div class="entry-phonetic">/let ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>向上</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 25 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">look about</div>
+                        <div class="entry-phonetic">/lʊk əˈbaʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>看关于</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 26 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">look forward to</div>
+                        <div class="entry-phonetic">/lʊk ˈfɔːwəd tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>未来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 27 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">look up at</div>
+                        <div class="entry-phonetic">/lʊk ʌp æt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>看上面在</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 28 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">look up to</div>
+                        <div class="entry-phonetic">/lʊk ʌp tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>向上看为</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 29 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">lose heart</div>
+                        <div class="entry-phonetic">/luːz hɑːt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>心肝</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 30 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make a face</div>
+                        <div class="entry-phonetic">/meɪk ə feɪs/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>做脸</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 31 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">maker</div>
+                        <div class="entry-phonetic">/ˈmeɪkə/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>制做者</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 32 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">massered</div>
+                        <div class="entry-phonetic">/ˈmæsəd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>先生</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 33 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">mined</div>
+                        <div class="entry-phonetic">/maɪnd/</div>
+                    </div>
+                    <span class="entry-category">代词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 34 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">natural</div>
+                        <div class="entry-phonetic">/ˈnætʃrəl/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>自然</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 35 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">modden</div>
+                        <div class="entry-phonetic">/ˈmɒdn/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>泥泞的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 36 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">necessary lesson</div>
+                        <div class="entry-phonetic">/ˈnesəsəri ˈlesn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>紧张的上课</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 37 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make - made - maken</div>
+                        <div class="entry-phonetic">/meɪk meɪd ˈmeɪkən/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>make的过去式和过去分词形式</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 38 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make a leaving</div>
+                        <div class="entry-phonetic">/meɪk ə ˈliːvɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>做树叶</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 39 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make frience with</div>
+                        <div class="entry-phonetic">/meɪk ˈfriːəns wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>做一些与</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 40 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make up once mind</div>
+                        <div class="entry-phonetic">/meɪk ʌp wʌns maɪnd/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>向上一个</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 41 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">nider more</div>
+                        <div class="entry-phonetic">/ˈnaɪdə mɔː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>更多</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 42 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">next to</div>
+                        <div class="entry-phonetic">/nekst tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>下一个</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 43 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">not antio</div>
+                        <div class="entry-phonetic">/nɒt ˈæntiəʊ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 44 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">no and then</div>
+                        <div class="entry-phonetic">/nəʊ ænd ðen/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不比</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 45 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">no that</div>
+                        <div class="entry-phonetic">/nəʊ ðæt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不是那样</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 46 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">planty</div>
+                        <div class="entry-phonetic">/ˈplænti/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>行星的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 47 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">provite</div>
+                        <div class="entry-phonetic">/prəˈvaɪt/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>保护</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 48 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">perard</div>
+                        <div class="entry-phonetic">/ˈperəd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>贺卡</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 49 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">proguct</div>
+                        <div class="entry-phonetic">/ˈprɒdʒʌkt/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>生产</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 50 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">produce</div>
+                        <div class="entry-phonetic">/prəˈdjuːs/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>介绍</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 51 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">provide</div>
+                        <div class="entry-phonetic">/prəˈvaɪd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>保护</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 52 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">realise</div>
+                        <div class="entry-phonetic">/ˈriːəlaɪz/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>通知</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 53 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">out of danger</div>
+                        <div class="entry-phonetic">/aʊt əv ˈdeɪndʒə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>没危险</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 54 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">pay attention to</div>
+                        <div class="entry-phonetic">/peɪ əˈtenʃn tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>出度</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 55 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">pay of</div>
+                        <div class="entry-phonetic">/peɪ ɒv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>为...花费</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 56 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">premess to do</div>
+                        <div class="entry-phonetic">/prɪˈmes tuː duː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>承诺做</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 57 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put of</div>
+                        <div class="entry-phonetic">/pʊt ɒv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>放下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 58 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put on a poffment</div>
+                        <div class="entry-phonetic">/pʊt ɒn ə ˈpɒfmənt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 59 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">relationship</div>
+                        <div class="entry-phonetic">/rɪˈleɪʃnʃɪp/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>友谊</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 60 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put on</div>
+                        <div class="entry-phonetic">/pʊt ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>放下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 61 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">resut</div>
+                        <div class="entry-phonetic">/rɪˈsʌt/</div>
+                    </div>
+                    <span class="entry-category">介词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>直到</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 62 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">satuation</div>
+                        <div class="entry-phonetic">/ˌsætʃuˈeɪʃn/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>站台</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 63 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sussity</div>
+                        <div class="entry-phonetic">/ˈsʌsəti/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>成功</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 64 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sevous</div>
+                        <div class="entry-phonetic">/ˈsevəs/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>服务</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 65 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">simlor</div>
+                        <div class="entry-phonetic">/ˈsɪmlə/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>简单的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 66 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">recore</div>
+                        <div class="entry-phonetic">/rɪˈkɔː/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>记分</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 67 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put out</div>
+                        <div class="entry-phonetic">/pʊt aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(释义1) 放外面</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 68 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put up</div>
+                        <div class="entry-phonetic">/pʊt ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(释义1) 放上去</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 69 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put up with</div>
+                        <div class="entry-phonetic">/pʊt ʌp wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>用...放上去</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 70 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">rever down</div>
+                        <div class="entry-phonetic">/ˈrevə daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>接收</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 71 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">refer to</div>
+                        <div class="entry-phonetic">/rɪˈfɜː tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>复习</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 72 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">see one's life</div>
+                        <div class="entry-phonetic">/siː wʌnz laɪf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>看某人生活</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 73 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">see off</div>
+                        <div class="entry-phonetic">/siː ɒf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不看</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 74 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sell out</div>
+                        <div class="entry-phonetic">/sel aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>卖出去</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 75 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sure</div>
+                        <div class="entry-phonetic">/ʃʊə/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>容易的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 76 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sick</div>
+                        <div class="entry-phonetic">/sɪk/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>生病的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 77 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">stamp</div>
+                        <div class="entry-phonetic">/stæmp/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>跑跳</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 78 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tallnogy</div>
+                        <div class="entry-phonetic">/ˈtɔːlnədʒi/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>对话</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 79 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tallviny</div>
+                        <div class="entry-phonetic">/ˈtɔːlvɪni/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>乡村</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 80 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tampure</div>
+                        <div class="entry-phonetic">/ˈtæmpjʊə/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>温度</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 81 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sticiter</div>
+                        <div class="entry-phonetic">/ˈstɪsɪtə/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>圆(词源：theatre)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 82 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tick</div>
+                        <div class="entry-phonetic">/tɪk/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>粘贴</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 83 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">stop - spot - spot</div>
+                        <div class="entry-phonetic">/stɒp spɒt spɒt/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>stop的过去式和过去分词形式</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 84 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">take - took - token</div>
+                        <div class="entry-phonetic">/teɪk tʊk ˈtəʊkən/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>take的过去式和过去分词形式</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 85 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put out</div>
+                        <div class="entry-phonetic">/pʊt aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(释义2) 推迟</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 86 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">put up</div>
+                        <div class="entry-phonetic">/pʊt ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(释义2) 持走来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 87 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">quarrel with</div>
+                        <div class="entry-phonetic">/ˈkwɒrəl wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>与...争吵</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 88 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">stand for</div>
+                        <div class="entry-phonetic">/stænd fɔː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>站起来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 89 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">stand out</div>
+                        <div class="entry-phonetic">/stænd aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>站</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 90 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">stand up</div>
+                        <div class="entry-phonetic">/stænd ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>起来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 91 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sit free</div>
+                        <div class="entry-phonetic">/sɪt friː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>坐下休息</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 92 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sit off</div>
+                        <div class="entry-phonetic">/sɪt ɒf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不坐</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 93 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sit up</div>
+                        <div class="entry-phonetic">/sɪt ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>坐起来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 94 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">show of</div>
+                        <div class="entry-phonetic">/ʃəʊ ɒf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>展示为</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 95 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sit and sit</div>
+                        <div class="entry-phonetic">/sɪt ænd sɪt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>坐和坐</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 96 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">so far as</div>
+                        <div class="entry-phonetic">/səʊ fɑː æz/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>太远为</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 97 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">settledown</div>
+                        <div class="entry-phonetic">/ˈsetldaʊn/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>setleddown</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 98 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">reace</div>
+                        <div class="entry-phonetic">/riːs/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 99 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">record</div>
+                        <div class="entry-phonetic">/ˈrekɔːd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>跨栏跑</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 100 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">mesord</div>
+                        <div class="entry-phonetic">/ˈmesɔːd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 101 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">suffer</div>
+                        <div class="entry-phonetic">/ˈsʌfə/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>猜想</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 102 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">courage</div>
+                        <div class="entry-phonetic">/ˈkʌrɪdʒ/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>鼓励</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 103 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">take the place of</div>
+                        <div class="entry-phonetic">/teɪk ðə pleɪs əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>去某地</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 104 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">take sb. in arm</div>
+                        <div class="entry-phonetic">/teɪk ˈsʌmbədi ɪn ɑːm/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>来人胳膊</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 105 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">talk sb. to do sth.</div>
+                        <div class="entry-phonetic">/tɔːk ˈsʌmbədi tuː duː ˈsʌmθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>讨论某人做什么</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 106 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">teach sb. to sth.</div>
+                        <div class="entry-phonetic">/tiːtʃ ˈsʌmbədi tuː ˈsʌmθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>教某人</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 107 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tell alive</div>
+                        <div class="entry-phonetic">/tel əˈlaɪv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>讨论生活</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 108 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tall story</div>
+                        <div class="entry-phonetic">/tɔːl ˈstɔːri/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>讲故事</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 109 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tell sth. from sth.</div>
+                        <div class="entry-phonetic">/tel ˈsʌmθɪŋ frɒm ˈsʌmθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>告诉某人某事</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 110 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">tell right from round</div>
+                        <div class="entry-phonetic">/tel raɪt frɒm raʊnd/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>对的转圈</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 111 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">the more... the more...</div>
+                        <div class="entry-phonetic">/ðə mɔː ðə mɔː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>多于</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 112 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">down result</div>
+                        <div class="entry-phonetic">/daʊn rɪˈzʌlt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>结果</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 113 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">too... to</div>
+                        <div class="entry-phonetic">/tuː tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>也</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 114 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">turn down</div>
+                        <div class="entry-phonetic">/tɜːn daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>向下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 115 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">turn over</div>
+                        <div class="entry-phonetic">/tɜːn ˈəʊvə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>打开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 116 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">turn to sb.</div>
+                        <div class="entry-phonetic">/tɜːn tuː ˈsʌmbədi/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>改变某人</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 117 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">turn up</div>
+                        <div class="entry-phonetic">/tɜːn ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>向上</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 118 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">up and down</div>
+                        <div class="entry-phonetic">/ʌp ænd daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>打开向下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 119 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">use up</div>
+                        <div class="entry-phonetic">/juːz ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>使</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 120 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be use to doing</div>
+                        <div class="entry-phonetic">/biː juːz tuː ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>用来做某事</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 121 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">wait up</div>
+                        <div class="entry-phonetic">/weɪt ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>等待</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 122 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">what's more</div>
+                        <div class="entry-phonetic">/wɒts mɔː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>什么多</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 123 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">with the help of</div>
+                        <div class="entry-phonetic">/wɪð ðə help əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>需要帮助</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 124 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">work out</div>
+                        <div class="entry-phonetic">/wɜːk aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>出去做</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 125 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be worryed about</div>
+                        <div class="entry-phonetic">/biː ˈwʌrid əbaʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>伤心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 126 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">wright down</div>
+                        <div class="entry-phonetic">/raɪt daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>沉重</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 127 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">wright to</div>
+                        <div class="entry-phonetic">/raɪt tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>沉重</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 128 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">wedsite</div>
+                        <div class="entry-phonetic">/ˈwɛbsaɪt/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>网站</p>
+                </div>
+                <div class="entry-memory-tip">
+                    <h4>记忆技巧</h4>
+                    <p>wedsite--&gt;wed--&gt;婚礼--&gt;婚纱--&gt;纱--&gt;网--&gt;网站--&gt;website</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 129 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">inctrunqtion</div>
+                        <div class="entry-phonetic">/ˌɪnkʌnˈtrʌŋkʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>说明书</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 130 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">store</div>
+                        <div class="entry-phonetic">/stɔː/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>计分</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 131 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">competron</div>
+                        <div class="entry-phonetic">/kəmˈpetrɒn/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>比赛</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 132 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">descration</div>
+                        <div class="entry-phonetic">/ˌdɛskrəˈteɪʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>描述</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 133 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">replace</div>
+                        <div class="entry-phonetic">/rɪˈpleɪs/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>答复</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 134 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">reword</div>
+                        <div class="entry-phonetic">/rɪˈwɜːd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>服务(词根：varied)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 135 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">borrow sth. to sth.</div>
+                        <div class="entry-phonetic">/ˈbɒrəʊ ˈsʌmθɪŋ tuː ˈsʌmθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 136 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">gleat care of</div>
+                        <div class="entry-phonetic">/ɡliːt keə əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 137 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">megcial</div>
+                        <div class="entry-phonetic">/ˈmeɡʃəl/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>有魔力的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 138 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">height</div>
+                        <div class="entry-phonetic">/haɪt/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>高的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 139 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">perear</div>
+                        <div class="entry-phonetic">/pəˈrɪə/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>多种多样的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 140 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">spreat</div>
+                        <div class="entry-phonetic">/spreɪt/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>传播</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 141 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">realaxship</div>
+                        <div class="entry-phonetic">/ˈriːlæksʃɪp/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>友谊</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 142 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">valt·ve</div>
+                        <div class="entry-phonetic">/vɒlt viː/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>福特·vel (暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 143 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">wide</div>
+                        <div class="entry-phonetic">/waɪd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：wide 过去式：wide 过去分词：wide</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 144 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">keep sb. away</div>
+                        <div class="entry-phonetic">/kiːp ˈsʌmbədi əˈweɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>使某人离开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 145 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">brush sth. of</div>
+                        <div class="entry-phonetic">/brʌʃ ˈsʌmθɪŋ ɒv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>洗一些东西</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 146 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be sapise at</div>
+                        <div class="entry-phonetic">/biː səˈpaɪz æt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>惊奇的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 147 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">make a face</div>
+                        <div class="entry-phonetic">/meɪk ə feɪs/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(释义2) 面对面</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 148 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">vacation</div>
+                        <div class="entry-phonetic">/vəˈkeɪʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>吃屎</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 149 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">die out</div>
+                        <div class="entry-phonetic">/daɪ aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>死(出去)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 150 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">happy happy</div>
+                        <div class="entry-phonetic">/ˈhæpi ˈhæpi/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>圣诞快乐</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 151 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">experience</div>
+                        <div class="entry-phonetic">/ɪkˈspɪəriəns/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>昂贵</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 152 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">Asterlia</div>
+                        <div class="entry-phonetic">/ɒˈstreɪliə/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>澳大利亚</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 153 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">according to</div>
+                        <div class="entry-phonetic">/əˈkɔːdɪŋ tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>包括</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 154 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">interdoction</div>
+                        <div class="entry-phonetic">/ˌɪntəˈdɒkʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 155 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">excuse</div>
+                        <div class="entry-phonetic">/ɪkˈskjuːs/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>对不起</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 156 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">fire</div>
+                        <div class="entry-phonetic">/faɪə/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>公平</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 157 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">so far as</div>
+                        <div class="entry-phonetic">/səʊ fɑː æz/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>就</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 158 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">store</div>
+                        <div class="entry-phonetic">/stɔː/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>分数</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 159 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">suggese</div>
+                        <div class="entry-phonetic">/səˈdʒes/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>建议</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 160 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">so far</div>
+                        <div class="entry-phonetic">/səʊ fɑː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>太远</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 161 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">so long as</div>
+                        <div class="entry-phonetic">/səʊ lɒŋ æz/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>就</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 162 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">sentence... to death</div>
+                        <div class="entry-phonetic">/ˈsentəns tuː deθ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>死形</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 163 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">the day after trommory</div>
+                        <div class="entry-phonetic">/ðə deɪ ˈɑːftə ˈtrɒməri/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>后天</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 164 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">counture</div>
+                        <div class="entry-phonetic">/ˈkaʊntʃə/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>决定</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 165 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">depene</div>
+                        <div class="entry-phonetic">/dɪˈpiːn/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>决定</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 166 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">pervide</div>
+                        <div class="entry-phonetic">/pəˈvaɪd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>售卖</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 167 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">progress</div>
+                        <div class="entry-phonetic">/ˈprəʊɡres/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>卖出</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 168 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">gast</div>
+                        <div class="entry-phonetic">/ɡɑːst/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>天气</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 169 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">form</div>
+                        <div class="entry-phonetic">/fɔːm/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>卖</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 170 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">perfer</div>
+                        <div class="entry-phonetic">/pəˈfɜː/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>好的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 171 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">throw</div>
+                        <div class="entry-phonetic">/θrəʊ/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：throw  过去式：threw 过去分词：threwen</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 172 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">neardly</div>
+                        <div class="entry-phonetic">/ˈnɪədli/</div>
+                    </div>
+                    <span class="entry-category">副词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>几乎不</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 173 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">weights</div>
+                        <div class="entry-phonetic">/weɪts/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>重量</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 174 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">bring</div>
+                        <div class="entry-phonetic">/brɪŋ/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：bring 过去式：brong 过去分词：broung</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 175 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">interdunce</div>
+                        <div class="entry-phonetic">/ˌɪntəˈdʌns/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 176 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">include</div>
+                        <div class="entry-phonetic">/ɪnˈkluːd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 177 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">meur</div>
+                        <div class="entry-phonetic">/mɜː/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>菜单</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 178 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">nessary</div>
+                        <div class="entry-phonetic">/ˈnesəri/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>紧张</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 179 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">disscion</div>
+                        <div class="entry-phonetic">/dɪˈskʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>字典</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 180 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">shine</div>
+                        <div class="entry-phonetic">/ʃaɪn/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：shine 过去式：shune 过去分词：shune 太阳能的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 181 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">exhidition</div>
+                        <div class="entry-phonetic">/ˌeksɪˈdɪʃən/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>(暂无释义)</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 182 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">toil</div>
+                        <div class="entry-phonetic">/tɔɪl/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>全部的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 183 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">role</div>
+                        <div class="entry-phonetic">/rəʊl/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>规则</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 184 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">comestry</div>
+                        <div class="entry-phonetic">/ˈkɒmɪstri/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>国家的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 185 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">died</div>
+                        <div class="entry-phonetic">/daɪd/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：died  过去式：diet 过去分词：diet 死</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 186 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">energy</div>
+                        <div class="entry-phonetic">/ˈenədʒi/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>精神</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 187 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">experment</div>
+                        <div class="entry-phonetic">/ɪkˈsperɪmənt/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>昂贵的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 188 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a hall of</div>
+                        <div class="entry-phonetic">/ə hɔːl əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>高</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 189 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all day</div>
+                        <div class="entry-phonetic">/ɔːl deɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>所有天</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 190 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all over</div>
+                        <div class="entry-phonetic">/ɔːl ˈəʊvə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>完</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 191 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all right</div>
+                        <div class="entry-phonetic">/ɔːl raɪt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>同意</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 199 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">parle</div>
+                        <div class="entry-phonetic">/pɑːl/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>法语，“说”，相当于 "say" + "speak"，用于第一人称、第二人称，第三人称单数</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 192 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">The six class is beater us.</div>
+                        <div class="entry-phonetic">/ðə sɪks klɑːs ɪz ˈbiːtər ʌs/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>六班击败了我们。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 193 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">I think nothing can pursue our’s drem.</div>
+                        <div class="entry-phonetic">/aɪ θɪŋk ˈnʌθɪŋ kæn pəˈsjuː aʊəz drɛm/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我认为没有什么能追求我们的梦想。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 194 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">Their works will in widsite</div>
+                        <div class="entry-phonetic">/ðeə wɜːks wɪl ɪn ˈwɪdsaɪt/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>他们的作品将在网站上。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 195 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">In that time, the bookmake people, at a time make one.</div>
+                        <div class="entry-phonetic">/ɪn ðæt taɪm ðə ˈbʊkmeɪk ˈpiːpl æt ə taɪm meɪk wʌn/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>在那个时候，印刷书籍的人一次只能制作一本。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 196 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">I think people book replace electronic book.</div>
+                        <div class="entry-phonetic">/aɪ θɪŋk ˈpiːpl bʊk rɪˈpleɪs ɪˌlekˈtrɒnɪk bʊk/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我认为纸质书会取代电子书。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 197 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">I’m not sure I right your idea.</div>
+                        <div class="entry-phonetic">/aɪm nɒt ʃʊə aɪ raɪt jɔːr aɪˈdɪə/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我不确定我理解你的想法是否正确。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 198 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">Big is a boat English, in high.</div>
+                        <div class="entry-phonetic">/bɪɡ ɪz ə bəʊt ˈɪŋɡlɪʃ ɪn haɪ/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>大船英语，高端大气。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 200 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">Let me interduce the sights of Beijing.</div>
+                        <div class="entry-phonetic">/let miː ˌɪntəˈdjuːs ðə saɪts əv beɪˈdʒɪŋ/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>让我介绍北京的景点。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 201 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">I sure she refuse hure you.</div>
+                        <div class="entry-phonetic">/aɪ ʃʊə ʃiː rɪˈfjuːz hjuːə juː/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我确信她拒绝伤害你。</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 202 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">She usually she not anyone les clever, but she has a strong will.</div>
+                        <div class="entry-phonetic">/ʃiː ˈjuːʒuəli ʃiː nɒt ˈeniwʌn les ˈklevə bʌt ʃiː hæz ə strɒŋ wɪl/</div>
+                    </div>
+                    <span class="entry-category">例句</span>
+                </div>
+                <div class="entry-definition">
+                    <p>她通常不如任何人聪明，但她有坚强的意志。</p>
+                    <p>Les 法语定冠词，相当于 "the"，用于复数</p>
+                </div>
+            </div>
+
+            <!-- 以下是添加的缺失词汇 -->
+            <!-- 词典条目 203 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a arrive at</div>
+                        <div class="entry-phonetic">/ə əˈraɪv æt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>到达</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 204 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a cording of</div>
+                        <div class="entry-phonetic">/ə ˈkɔːdɪŋ əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>根据</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 205 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a fill</div>
+                        <div class="entry-phonetic">/ə fɪl/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>填充</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 206 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a great money</div>
+                        <div class="entry-phonetic">/ə ɡreɪt ˈmʌni/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>很多钱</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 207 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a pice of</div>
+                        <div class="entry-phonetic">/ə paɪs əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一片，一块</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 208 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a pire</div>
+                        <div class="entry-phonetic">/ə paɪə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一对</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 209 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">a prert from</div>
+                        <div class="entry-phonetic">/ə ˈprɪt frɒm/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>好去处</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 210 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">accept</div>
+                        <div class="entry-phonetic">/əkˈsept/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>接受</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 211 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">achieve</div>
+                        <div class="entry-phonetic">/əˈtʃiːv/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>实现</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 212 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">add of to</div>
+                        <div class="entry-phonetic">/æd əv tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>添加到</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 213 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all kind of</div>
+                        <div class="entry-phonetic">/ɔːl kaɪnd əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>各种各样的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 214 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all our doing</div>
+                        <div class="entry-phonetic">/ɔːl ˈaʊər ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我们所有的行为</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 215 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all the best</div>
+                        <div class="entry-phonetic">/ɔːl ðə best/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一切顺利</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 216 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">all the year around</div>
+                        <div class="entry-phonetic">/ɔːl ðə jɪər əˈraʊnd/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>全年</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 217 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">and a place</div>
+                        <div class="entry-phonetic">/ænd ə pleɪs/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一个地方</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 218 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">as a meter of fact</div>
+                        <div class="entry-phonetic">/æz ə ˈmiːtər əv fækt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>事实上</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 219 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">as a resort</div>
+                        <div class="entry-phonetic">/æz ə rɪˈzɔːt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>作为度假胜地</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 220 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at begin of</div>
+                        <div class="entry-phonetic">/æt bɪˈɡɪn əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>在开始的时候</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 221 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at list</div>
+                        <div class="entry-phonetic">/æt lɪst/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>至少</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 222 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at once</div>
+                        <div class="entry-phonetic">/æt wʌns/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>立即</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 223 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at sometime</div>
+                        <div class="entry-phonetic">/æt ˈsʌmtaɪm/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>在某个时候</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 224 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at the foot of</div>
+                        <div class="entry-phonetic">/æt ðə fʊt əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>在...脚下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 225 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at this time of year</div>
+                        <div class="entry-phonetic">/æt ðɪs taɪm əv jɪər/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>每年的这个时候</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 226 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">at times</div>
+                        <div class="entry-phonetic">/æt taɪmz/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>有时</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 227 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be come to</div>
+                        <div class="entry-phonetic">/biː kʌm tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>达到</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 228 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be long to</div>
+                        <div class="entry-phonetic">/biː lɒŋ tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>属于</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 229 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be proud of</div>
+                        <div class="entry-phonetic">/biː praʊd əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>为...骄傲</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 230 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be stick with</div>
+                        <div class="entry-phonetic">/biː stɪk wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>坚持</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 231 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">be woridy about</div>
+                        <div class="entry-phonetic">/biː ˈwʌridi əˈbaʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>担心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 232 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">blackground</div>
+                        <div class="entry-phonetic">/ˈblækɡraʊnd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>背景</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 233 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">break in</div>
+                        <div class="entry-phonetic">/breɪk ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>闯入</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 234 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">break on</div>
+                        <div class="entry-phonetic">/breɪk ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 235 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">break out</div>
+                        <div class="entry-phonetic">/breɪk aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>爆发</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 236 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">break up</div>
+                        <div class="entry-phonetic">/breɪk ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>分手</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 237 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">brick down</div>
+                        <div class="entry-phonetic">/brɪk daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>拆除</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 238 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">brick in</div>
+                        <div class="entry-phonetic">/brɪk ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>用砖堵</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 239 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">brick of</div>
+                        <div class="entry-phonetic">/brɪk əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>砖块</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 240 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">brok away from</div>
+                        <div class="entry-phonetic">/brəʊk əˈweɪ frɒm/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>脱离</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 241 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">burest into lafter</div>
+                        <div class="entry-phonetic">/bɜːst ˈɪntuː ˈlɑːftər/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>突然大笑</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 242 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">burn down</div>
+                        <div class="entry-phonetic">/bɜːn daʊn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>烧毁</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 243 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">burn out</div>
+                        <div class="entry-phonetic">/bɜːn aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>烧坏</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 244 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">burst in to tears</div>
+                        <div class="entry-phonetic">/bɜːst ˈɪntuː tɪəz/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>突然哭起来</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 245 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">business</div>
+                        <div class="entry-phonetic">/ˈbɪznəs/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>生意</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 246 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">by act dent</div>
+                        <div class="entry-phonetic">/baɪ ækt dent/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>偶然</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 247 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">by and by</div>
+                        <div class="entry-phonetic">/baɪ ænd baɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不久</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 248 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">by day</div>
+                        <div class="entry-phonetic">/baɪ deɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>白天</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 249 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">by ear</div>
+                        <div class="entry-phonetic">/baɪ ɪə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>凭记忆</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 250 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">by the way</div>
+                        <div class="entry-phonetic">/baɪ ðə weɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>顺便说一下</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 251 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">can't help doing</div>
+                        <div class="entry-phonetic">/kɑːnt help ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>情不自禁</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 252 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">care in</div>
+                        <div class="entry-phonetic">/keər ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>关心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 253 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">care on</div>
+                        <div class="entry-phonetic">/keər ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续关心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 254 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">care up</div>
+                        <div class="entry-phonetic">/keər ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>关心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 255 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">carmornei a laviny</div>
+                        <div class="entry-phonetic">/ˈkɑːmərneɪ ə ˈlævɪni/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>早晨</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 256 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">carry of</div>
+                        <div class="entry-phonetic">/ˈkæri əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>带走</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 257 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">carry on</div>
+                        <div class="entry-phonetic">/ˈkæri ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 258 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">centry</div>
+                        <div class="entry-phonetic">/ˈsentri/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>世纪</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 259 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">centure</div>
+                        <div class="entry-phonetic">/ˈsentʃər/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>中心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 260 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">connect to</div>
+                        <div class="entry-phonetic">/kəˈnekt tuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>连接到</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 261 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">connect with</div>
+                        <div class="entry-phonetic">/kəˈnekt wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>与...连接</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 262 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">couglalit on</div>
+                        <div class="entry-phonetic">/ˈkʌɡlælɪt ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 263 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">cut up</div>
+                        <div class="entry-phonetic">/kʌt ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>切碎</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 264 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">day and night</div>
+                        <div class="entry-phonetic">/deɪ ænd naɪt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>日日夜夜</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 265 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">deal with</div>
+                        <div class="entry-phonetic">/diːl wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>处理</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 266 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">depend on</div>
+                        <div class="entry-phonetic">/dɪˈpend ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>取决于</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 267 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">devide into</div>
+                        <div class="entry-phonetic">/dɪˈvaɪd ˈɪntuː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>分成</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 268 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">devide up</div>
+                        <div class="entry-phonetic">/dɪˈvaɪd ʌp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>分配</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 269 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">didy life</div>
+                        <div class="entry-phonetic">/ˈdɪdi laɪf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>整理生活</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 270 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">do some shopping</div>
+                        <div class="entry-phonetic">/duː sʌm ˈʃɒpɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>购物</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 271 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">doesn't of</div>
+                        <div class="entry-phonetic">/ˈdʌzənt əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>不是</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 272 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">drop in</div>
+                        <div class="entry-phonetic">/drɒp ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>顺便拜访</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 273 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">each other</div>
+                        <div class="entry-phonetic">/iːtʃ ˈʌðə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>彼此</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 274 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">eather our</div>
+                        <div class="entry-phonetic">/ˈiːðə ˈaʊər/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>我们中的任何一个</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 275 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">enjoy oneself</div>
+                        <div class="entry-phonetic">/ɪnˈdʒɔɪ wʌnˈself/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>玩得开心</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 276 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">even if</div>
+                        <div class="entry-phonetic">/ˈiːvn ɪf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>即使</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 277 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">everything</div>
+                        <div class="entry-phonetic">/ˈevriθɪŋ/</div>
+                    </div>
+                    <span class="entry-category">代词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>一切</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 278 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">explane</div>
+                        <div class="entry-phonetic">/ɪkˈspleɪn/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>解释</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 279 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">face to face</div>
+                        <div class="entry-phonetic">/feɪs tuː feɪs/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>面对面</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 280 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">far from</div>
+                        <div class="entry-phonetic">/fɑː frɒm/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>远离</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 281 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">feel in</div>
+                        <div class="entry-phonetic">/fiːl ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>感觉</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 282 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">feel like doing</div>
+                        <div class="entry-phonetic">/fiːl laɪk ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>想要做</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 283 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">feger out</div>
+                        <div class="entry-phonetic">/ˈfeɡə aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>弄清楚</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 284 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">fill</div>
+                        <div class="entry-phonetic">/fɪl/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>填充</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 285 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">fill with</div>
+                        <div class="entry-phonetic">/fɪl wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>充满</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 286 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">for a sleep</div>
+                        <div class="entry-phonetic">/fɔːr ə sliːp/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>睡觉</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 287 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">for good</div>
+                        <div class="entry-phonetic">/fɔːr ɡʊd/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>永久</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 288 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">for ill</div>
+                        <div class="entry-phonetic">/fɔːr ɪl/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>生病</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 289 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">forever</div>
+                        <div class="entry-phonetic">/fərˈevər/</div>
+                    </div>
+                    <span class="entry-category">副词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>永远</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 290 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">frent</div>
+                        <div class="entry-phonetic">/frent/</div>
+                    </div>
+                    <span class="entry-category">形容词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>友好的</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 291 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">give away</div>
+                        <div class="entry-phonetic">/ɡɪv əˈweɪ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>赠送</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 292 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">give back</div>
+                        <div class="entry-phonetic">/ɡɪv bæk/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>归还</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 293 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">give in</div>
+                        <div class="entry-phonetic">/ɡɪv ɪn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>屈服</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 294 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">give out</div>
+                        <div class="entry-phonetic">/ɡɪv aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>分发</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 295 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go for a work</div>
+                        <div class="entry-phonetic">/ɡəʊ fɔːr ə wɜːk/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>去工作</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 296 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go freashing</div>
+                        <div class="entry-phonetic">/ɡəʊ ˈfreʃɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>去新鲜</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 297 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go in for</div>
+                        <div class="entry-phonetic">/ɡəʊ ɪn fɔːr/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>参加</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 298 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go off</div>
+                        <div class="entry-phonetic">/ɡəʊ ɒf/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>离开</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 299 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go on</div>
+                        <div class="entry-phonetic">/ɡəʊ ɒn/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 300 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go on doing</div>
+                        <div class="entry-phonetic">/ɡəʊ ɒn ˈduːɪŋ/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>继续做</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 301 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go out</div>
+                        <div class="entry-phonetic">/ɡəʊ aʊt/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>出去</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 302 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go over</div>
+                        <div class="entry-phonetic">/ɡəʊ ˈəʊvə/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>复习</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 303 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">go through</div>
+                        <div class="entry-phonetic">/ɡəʊ θruː/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>经历</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 304 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">ground</div>
+                        <div class="entry-phonetic">/ɡraʊnd/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>地面</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 305 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">hont of</div>
+                        <div class="entry-phonetic">/hɒnt əv/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>荣誉</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 306 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">ring</div>
+                        <div class="entry-phonetic">/rɪŋ/</div>
+                    </div>
+                    <span class="entry-category">动词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>原形：ring；过去式：rang；过去分词：rung</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 307 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">simble</div>
+                        <div class="entry-phonetic">/ˈsɪmbl/</div>
+                    </div>
+                    <span class="entry-category">名词</span>
+                </div>
+                <div class="entry-definition">
+                    <p>符号</p>
+                </div>
+            </div>
+
+            <!-- 词典条目 308 -->
+            <div class="entry">
+                <div class="entry-header">
+                    <div>
+                        <div class="entry-word">touch up with</div>
+                        <div class="entry-phonetic">/tʌtʃ ʌp wɪð/</div>
+                    </div>
+                    <span class="entry-category">短语</span>
+                </div>
+                <div class="entry-definition">
+                    <p>触摸</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 分页控件 -->
+        <div class="pagination" id="pagination">
+            <button id="prev-page" aria-label="上一页">上一页</button>
+            <div class="page-numbers" id="page-numbers"></div>
+            <span class="pagination-info" id="page-info"></span>
+            <button id="next-page" aria-label="下一页">下一页</button>
+        </div>
+
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3>设置</h3>
+                <button class="settings-close" id="settings-close">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h4>背景颜色</h4>
+                    <div class="color-options">
+                        <button class="color-option" data-bg="white">白色</button>
+                        <button class="color-option" data-bg="linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)">粉色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)">蓝色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">紫色渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">湖蓝渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(135deg, #fa709a 0%, #fee140 100%)">橙粉渐变</button>
+                        <button class="color-option" data-bg="linear-gradient(45deg, #43e97b 0%, #38f9d7 100%)">绿色渐变</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注释弹窗 -->
+    <div class="annotation-popup" id="annotation-popup">
+        <div class="annotation-content">
+            <div class="annotation-header">
+                <h4>注释</h4>
+                <button class="annotation-close" id="annotation-close">&times;</button>
+            </div>
+            <div class="annotation-body" id="annotation-body">
+                <!-- 注释内容将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加页面加载动画
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+
+    <!-- 分页功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const entries = Array.from(document.querySelectorAll('.entry'));
+            const totalEntries = entries.length;
+            const entriesPerPage = 20;
+            const totalPages = Math.ceil(totalEntries / entriesPerPage);
+            let currentPage = 1;
+            
+            const prevPageBtn = document.getElementById('prev-page');
+            const nextPageBtn = document.getElementById('next-page');
+            const pageInfo = document.getElementById('page-info');
+            const pageNumbersContainer = document.getElementById('page-numbers');
+            
+            // 生成页码按钮 - 显示所有页码
+            function generatePageNumbers() {
+                pageNumbersContainer.innerHTML = '';
+                
+                // 显示从第1页到最后一页的所有页码
+                for (let i = 1; i <= totalPages; i++) {
+                    createPageButton(i);
+                }
+            }
+            
+            // 创建单个页码按钮
+            function createPageButton(pageNum) {
+                const button = document.createElement('button');
+                button.textContent = pageNum;
+                button.ariaLabel = `第 ${pageNum} 页`;
+                if (pageNum === currentPage) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', function() {
+                    showPage(pageNum);
+                });
+                pageNumbersContainer.appendChild(button);
+            }
+            
+            // 显示指定页码的条目
+            function showPage(page) {
+                const startIndex = (page - 1) * entriesPerPage;
+                const endIndex = startIndex + entriesPerPage;
+                
+                entries.forEach((entry, index) => {
+                    if (index >= startIndex && index < endIndex) {
+                        entry.style.display = 'block';
+                    } else {
+                        entry.style.display = 'none';
+                    }
+                });
+                
+                // 更新页码信息
+                pageInfo.textContent = `${page} / ${totalPages}`;
+                
+                // 更新按钮状态
+                prevPageBtn.disabled = page === 1;
+                nextPageBtn.disabled = page === totalPages;
+                
+                currentPage = page;
+                
+                // 重新生成页码按钮
+                generatePageNumbers();
+            }
+            
+            // 初始显示第一页
+            showPage(1);
+            
+            // 上一页按钮事件
+            prevPageBtn.addEventListener('click', function() {
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+            
+            // 下一页按钮事件
+            nextPageBtn.addEventListener('click', function() {
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

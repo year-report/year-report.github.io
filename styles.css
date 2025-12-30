@@ -1,0 +1,1325 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 调整页面高度 */
+.meme-page {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* 变量定义 */
+:root {
+    /* 默认白色背景 */
+    --color-background: white;
+    --color-gray: #f5f5f7;
+    --color-text: #333;
+    --color-light-text: #666;
+    --color-accent: #0071e3;
+    --color-accent-hover: #0077ed;
+    --color-border: #d2d2d7;
+    
+    /* 毛玻璃变量 */
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --glass-blur: 15px;
+    
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 限制翻动速度，延长到0.8秒 */
+    --transition-fast: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 防止快速滚动出现白边和滚动条 - 合并的html和body样式 */
+html,
+body {
+    /* 基础样式 */
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background: var(--color-background);
+    background-attachment: fixed; /* 背景固定，更有层次感 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    
+    /* 防止白边和滚动条的核心设置 */
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    /* 隐藏滚动条 */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* 隐藏webkit滚动条 */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* 顶部按钮容器样式 */
+.top-buttons-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 16px;
+    z-index: 1000;
+}
+
+/* 全局顶部按钮样式 - 确保所有尺寸下都正确显示 */
+.top-buttons-container .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: 500;
+    
+    /* 核心代码：背景模糊滤镜 */
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur)); /* 兼容Safari */
+    
+    /* 半透明白色背景 */
+    background: var(--glass-bg);
+    
+    /* 边框和阴影增加立体感 */
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 手机端优化顶部按钮容器 */
+@media (max-width: 480px) {
+    .top-buttons-container {
+        top: 12px;
+        right: 12px;
+        gap: 8px;
+    }
+    
+    .top-buttons-container .nav-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .top-buttons-container .nav-icon {
+        font-size: 14px;
+    }
+    
+    /* 底部导航按钮优化 - 减小大小 */
+    .navigation-buttons {
+        gap: 8px;
+        bottom: 12px;
+    }
+    
+    .navigation-buttons .nav-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    /* 分页按钮优化 */
+    .pagination {
+        gap: 8px;
+    }
+    
+    .page-numbers {
+        gap: 4px;
+    }
+    
+    .page-numbers button {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+/* Apple Watch 优化顶部按钮容器 */
+@media (max-width: 200px) {
+    .top-buttons-container {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+    }
+    
+    .top-buttons-container .nav-btn {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+    
+    .top-buttons-container .nav-icon {
+        font-size: 12px;
+    }
+    
+    /* 底部导航按钮优化 - 减小大小 */
+    .navigation-buttons {
+        gap: 6px;
+        bottom: 8px;
+    }
+    
+    .navigation-buttons .nav-btn {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+    
+    /* 分页按钮优化 */
+    .pagination {
+        gap: 4px;
+    }
+    
+    .page-numbers {
+        gap: 3px;
+    }
+    
+    .page-numbers button {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+}
+
+/* 设置按钮容器样式 */
+.settings-btn-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* 容器样式 */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏 - 移除小白边 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    
+    /* 核心代码：背景模糊滤镜 */
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur)); /* 兼容Safari */
+    
+    /* 半透明白色背景 */
+    background: var(--glass-bg);
+    
+    /* 移除边框，解决小白边问题 */
+    border-bottom: none;
+    box-shadow: var(--glass-shadow);
+    
+    transition: var(--transition);
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.navbar-logo h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: var(--transition-fast);
+}
+
+.navbar-info {
+    font-size: 14px;
+    color: var(--color-light-text);
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+/* 主内容区 - 单页滚动 */
+.meme-container {
+    margin-top: 64px;
+}
+
+.meme-page {
+    min-height: calc(100vh - 64px);
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+}
+
+/* 热梗内容样式 */
+.meme-content {
+    width: 100%;
+    max-width: 600px;
+    min-width: 600px;
+    
+    display: block;
+}
+
+.meme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.meme-emoji {
+    font-size: 80px;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.meme-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.meme-category {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    background-color: rgba(0, 113, 227, 0.08);
+    padding: 6px 12px;
+    border-radius: 980px;
+}
+
+.meme-popularity {
+    font-size: 14px;
+    color: var(--color-light-text);
+    font-weight: 500;
+}
+
+.meme-title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 32px;
+    color: var(--color-text);
+}
+
+.meme-description {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+.meme-example {
+    background-color: var(--color-gray);
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+}
+
+.meme-example h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.meme-example p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    font-style: italic;
+}
+
+/* 注释标记样式 */
+.annotation-marker {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-accent);
+    cursor: pointer;
+    margin-left: 2px;
+    vertical-align: super;
+    line-height: 1;
+    transition: var(--transition-fast);
+    /* 微妙阴影效果 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    /* 圆形背景，增强视觉识别 */
+    background: rgba(0, 113, 227, 0.1);
+    padding: 2px 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 113, 227, 0.2);
+}
+
+.annotation-marker:hover {
+    color: var(--color-accent-hover);
+    transform: scale(1.15);
+    background: rgba(0, 113, 227, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 113, 227, 0.2);
+}
+
+/* 注释浮窗样式 - 完全按照示例的毛玻璃效果 */
+.annotation-popup {
+    position: absolute;
+    /* 核心代码：背景模糊滤镜 */
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur)); /* 兼容Safari */
+    
+    /* 半透明白色背景 */
+    background: var(--glass-bg);
+    
+    /* 边框和阴影增加立体感 */
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    
+    /* 圆角设计 */
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 360px;
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transform: translateY(-15px) scale(0.95);
+    transition: var(--transition);
+    pointer-events: auto;
+}
+
+.annotation-popup.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.annotation-popup::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid rgba(255, 255, 255, 0.6);
+    z-index: -1;
+    filter: blur(1px);
+}
+
+.annotation-content {
+    position: relative;
+}
+
+.annotation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.annotation-header h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.annotation-close {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 16px;
+    color: var(--color-light-text);
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(10px);
+}
+
+.annotation-close:hover {
+    background-color: var(--color-gray);
+    color: var(--color-text);
+    transform: scale(1.1);
+}
+
+.annotation-body {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.annotation-body p {
+    margin: 0 0 8px 0;
+}
+
+.annotation-body p:last-child {
+    margin-bottom: 0;
+}
+
+
+
+/* 导航控制按钮样式 - 增强液态玻璃效果 */
+.navigation-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    z-index: 900;
+    /* 移除transform，使用flex居中 */
+}
+
+/* 导航按钮 - 仅针对底部导航按钮，完全按照示例的毛玻璃效果 */
+body .navigation-buttons .nav-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 16px 32px !important;
+    border-radius: 980px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    
+    /* 核心代码：背景模糊滤镜 */
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important; /* 兼容Safari */
+    
+    /* 半透明白色背景 */
+    background: var(--glass-bg) !important;
+    
+    /* 边框和阴影增加立体感 */
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    
+    color: var(--color-text) !important;
+    cursor: pointer !important;
+    transition: var(--transition-fast) !important;
+    opacity: 1 !important;
+    /* 移除动画，直接显示按钮 */
+    animation: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    
+    /* 确保按钮大小可控 */
+    min-width: auto !important;
+    max-width: none !important;
+    width: auto !important;
+    z-index: 999 !important;
+    /* 确保按钮在最上层 */
+}
+
+/* 响应式底部导航按钮样式 */
+@media (max-width: 768px) {
+    body .navigation-buttons .nav-btn {
+        padding: 12px 24px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body .navigation-buttons .nav-btn {
+        padding: 10px 20px !important;
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 200px) {
+    body .navigation-buttons .nav-btn {
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+    }
+}
+
+/* 按钮内容层 - 适用于所有按钮 */
+.nav-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* 点击波纹效果 (Dua Effect) - 适用于所有按钮 */
+.nav-btn, .annotation-marker, .annotation-close {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::after, .annotation-marker::after, .annotation-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    pointer-events: none;
+}
+
+.nav-btn:active::after, .annotation-marker:active::after, .annotation-close:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 底部导航按钮的动画延迟 */
+.navigation-buttons .nav-btn:first-child {
+    animation-delay: 0.4s;
+}
+
+.navigation-buttons .nav-btn:last-child {
+    animation-delay: 0.5s;
+}
+
+/* 顶部导航按钮的动画延迟 */
+.top-buttons-container .nav-btn:first-child {
+    animation-delay: 0.3s;
+}
+
+.top-buttons-container .nav-btn:last-child {
+    animation-delay: 0.4s;
+}
+
+/* 底部导航按钮的毛玻璃悬停效果 */
+.navigation-buttons .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+    transition: var(--transition);
+}
+
+.navigation-buttons .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.navigation-buttons .nav-btn:disabled:hover {
+    transform: none;
+    box-shadow: var(--glass-shadow);
+}
+
+/* 顶部导航按钮的毛玻璃悬停效果 */
+.top-buttons-container .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+    transition: var(--transition);
+}
+
+.top-buttons-container .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.top-buttons-container .nav-btn:disabled:hover {
+    transform: none;
+    box-shadow: var(--glass-shadow);
+}
+
+/* 导航图标样式 */
+.nav-icon {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 页面进入动画 - 底部导航按钮 */
+@keyframes fadeInUpBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 页面进入动画 - 顶部导航按钮 */
+@keyframes fadeInUpTop {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 更新动画引用 */
+.navigation-buttons .nav-btn {
+    animation-name: fadeInUpBottom;
+}
+
+.top-buttons-container .nav-btn {
+    animation-name: fadeInUpTop;
+}
+
+/* 页脚样式 */
+.footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background);
+}
+
+.footer-copyright {
+    font-size: 12px;
+    color: var(--color-light-text);
+    text-align: center;
+}
+
+/* 设置面板样式 - 优化版 */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 100%;
+    height: 100vh;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.settings-panel.active {
+    right: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.settings-content {
+    position: absolute;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-left: 1px solid var(--glass-border);
+    box-shadow: -10px 0 40px 0 rgba(31, 38, 135, 0.2);
+    padding: 32px 24px;
+    overflow-y: auto;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+}
+
+.settings-panel.active .settings-content {
+    right: 0;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.settings-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: -0.5px;
+}
+
+.settings-close {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    font-size: 20px;
+    color: var(--color-text);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.settings-close:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section {
+    margin-bottom: 40px;
+}
+
+.settings-section h4 {
+    margin: 0 0 20px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: 0.2px;
+}
+
+.color-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.color-option {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.color-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    border-radius: 3px 0 0 3px;
+    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.color-option:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.color-option:hover::before {
+    opacity: 1;
+}
+
+/* 优化设置按钮样式 */
+.nav-settings {
+    padding: 12px 20px;
+    animation-delay: 0.6s;
+    /* 移除固定圆角，使用.nav-btn的默认圆角 */
+}
+
+/* 滚动条样式优化 */
+.settings-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.settings-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* 调整导航栏布局，为设置按钮留出空间 */
+.navbar-content {
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.nav-settings {
+    animation-delay: 0.6s;
+}
+
+/* 调整导航按钮样式，使其更小一些 */
+.nav-btn {
+    padding: 12px 24px;
+    font-size: 13px;
+}
+
+.nav-text {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .nav-text {
+        display: inline;
+    }
+}
+
+/* 确保页数显示正常 */
+#current-meme {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.meme-content {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .meme-page {
+        padding: 60px 0;
+        min-height: calc(100vh - 64px);
+    }
+
+    .meme-header {
+        margin-bottom: 32px;
+    }
+
+    .meme-emoji {
+        font-size: 60px;
+    }
+
+    .meme-title {
+        font-size: 36px;
+        margin-bottom: 24px;
+    }
+
+    .meme-description {
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+
+    .annotation-content {
+        padding: 24px;
+        width: 95%;
+    }
+
+    .annotations-list {
+        display: none;
+    }
+
+    .navigation-buttons {
+        bottom: 16px;
+    }
+
+    /* 仅针对底部导航按钮 */
+    .navigation-buttons .nav-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    /* 顶部导航按钮样式保持不变 */
+}
+
+@media (max-width: 480px) {
+    .meme-page {
+        padding: 40px 0;
+    }
+
+    .meme-emoji {
+        font-size: 50px;
+    }
+
+    .meme-title {
+        font-size: 28px;
+    }
+
+    .meme-meta {
+        align-items: flex-start;
+        margin-top: 16px;
+    }
+
+    .meme-header {
+        flex-direction: column;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* 仅针对底部导航按钮设置宽度 */
+    .navigation-buttons .nav-btn {
+        width: auto;
+        padding: 10px 20px;
+        font-size: 13px;
+        justify-content: center;
+    }
+    
+    /* 增强手机端体验 */
+    .meme-content {
+        min-width: auto;
+        width: 100%;
+        padding: 0 16px;
+    }
+    
+    /* 确保按钮易于点击，但不影响顶部导航按钮 */
+    .nav-btn:not(.top-buttons-container .nav-btn) {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* 确保链接和按钮有足够的点击区域，但不影响顶部导航按钮 */
+    a, button:not(.top-buttons-container .nav-btn) {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* 确保顶部导航按钮保持正确的尺寸和形状 */
+    .top-buttons-container .nav-btn {
+        width: auto;
+        min-width: auto;
+        padding: 8px 16px;
+        font-size: 12px;
+        border-radius: 980px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    /* 个人主页手机优化 */
+    .profile-name {
+        font-size: 32px;
+    }
+    
+    .profile-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .profile-description {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    
+    /* 产品页面手机优化 */
+    .hero-section {
+        padding: 80px 20px 60px;
+    }
+    
+    .product-title {
+        font-size: 48px;
+    }
+    
+    .product-subtitle {
+        font-size: 20px;
+    }
+    
+    /* 光式英语手机优化 */
+    .dictionary-container {
+        padding: 60px 15px 40px;
+    }
+    
+    .dictionary-title {
+        font-size: 48px;
+    }
+    
+    .dictionary-subtitle {
+        font-size: 20px;
+    }
+    
+    .dictionary-entries {
+        padding: 20px;
+    }
+    
+    .entry {
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+    }
+    
+    .entry-word {
+        font-size: 32px;
+    }
+    
+    .entry-definition p {
+        font-size: 14px;
+    }
+    
+    /* 分页样式手机优化 */
+    .pagination {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+    
+    .page-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        max-width: 100%;
+    }
+    
+    .pagination button {
+        min-width: 36px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .pagination-info {
+        font-size: 12px;
+        margin: 0;
+    }
+    
+    /* 免责声明手机优化 */
+    .disclaimer-content {
+        padding: 24px;
+        max-height: 80vh;
+    }
+    
+    .disclaimer-title {
+        font-size: 20px;
+    }
+    
+    .disclaimer-text {
+        font-size: 12px;
+    }
+    
+    .disclaimer-checkbox label {
+        font-size: 12px;
+    }
+    
+    .disclaimer-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Apple Watch 专用样式 */
+@media (max-width: 200px) {
+    body {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    
+    .meme-page {
+        padding: 20px 10px;
+    }
+    
+    .meme-content {
+        min-width: auto;
+        width: 100%;
+        padding: 0 8px;
+    }
+    
+    .meme-emoji {
+        font-size: 30px;
+    }
+    
+    .meme-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+    
+    .meme-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .meme-example {
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .meme-example h3 {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .meme-example p {
+        font-size: 10px;
+    }
+    
+    /* 仅针对非顶部导航按钮设置样式 */
+    .nav-btn:not(.top-buttons-container .nav-btn) {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .nav-text {
+        display: none;
+    }
+    
+    .top-buttons-container {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+    }
+    
+    /* 确保Apple Watch上的顶部导航按钮保持正确样式 */
+    .top-buttons-container .nav-btn {
+        padding: 6px 12px;
+        font-size: 10px;
+        border-radius: 980px;
+        width: auto;
+        min-width: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    /* 个人主页 Apple Watch 样式 */
+    .profile-name {
+        font-size: 24px;
+    }
+    
+    .profile-title {
+        font-size: 12px;
+    }
+    
+    .profile-description {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .social-link {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
+    
+    .content-card {
+        padding: 16px;
+    }
+    
+    .card-title {
+        font-size: 14px;
+    }
+    
+    .card-content {
+        font-size: 10px;
+    }
+    
+    /* 产品页面 Apple Watch 样式 */
+    .product-title {
+        font-size: 32px;
+    }
+    
+    .product-subtitle {
+        font-size: 16px;
+    }
+    
+    .feature-text h3 {
+        font-size: 18px;
+    }
+    
+    .feature-text p {
+        font-size: 10px;
+    }
+    
+    /* 光式英语 Apple Watch 样式 */
+    .dictionary-title {
+        font-size: 32px;
+    }
+    
+    .dictionary-subtitle {
+        font-size: 16px;
+    }
+    
+    .entry-word {
+        font-size: 24px;
+    }
+    
+    .entry-phonetic {
+        font-size: 12px;
+    }
+    
+    .entry-definition p {
+        font-size: 12px;
+    }
+    
+    /* 分页样式 Apple Watch 优化 */
+    .pagination {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .page-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+        max-width: 100%;
+    }
+    
+    .pagination button {
+        padding: 4px 8px;
+        font-size: 10px;
+        min-width: 28px;
+    }
+    
+    .pagination-info {
+        font-size: 10px;
+        margin: 0;
+    }
+    
+    /* 注释样式 Apple Watch 优化 */
+    .annotation-popup {
+        max-width: 200px;
+        padding: 12px;
+    }
+    
+    .annotation-body {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+}
